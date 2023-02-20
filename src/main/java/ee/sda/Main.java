@@ -9,7 +9,10 @@ public class Main {
 
     public static void main(String[] args) {
         //firstExercise();
-        secondExercise();
+        //secondExercise();
+        //thirdExercise();
+        //fourthExercise();
+        fifthExercise();
     }
 
     private static void firstExercise() {
@@ -63,4 +66,90 @@ public class Main {
             sqlexc.printStackTrace();
         }
     }
+
+    private static void thirdExercise() {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection(
+                    DATABASE_HOST,
+                    DATABASE_USERNAME,
+                    DATABASE_PASSWORD);
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM employees WHERE firstName LIKE 'J%'");
+
+            while(rs.next()) {
+                Integer employeeId = rs.getInt("employeeId");
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                Date dateOfBirth = rs.getDate("dateOfBirth");
+                System.out.println(employeeId + " " + firstName + " " + lastName + " " + dateOfBirth);
+            }
+
+        } catch (SQLException sqlexc) {
+            System.out.println("Database communication error");
+            sqlexc.printStackTrace();
+        }
+    }
+
+    private static void fourthExercise() {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection(
+                    DATABASE_HOST,
+                    DATABASE_USERNAME,
+                    DATABASE_PASSWORD);
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM employees " +
+                    "LEFT JOIN employees_projects ON employees.employeeId = employees_projects.employeeId WHERE employeeProjectId is not NULL");
+
+            while(rs.next()) {
+                Integer employeeId = rs.getInt("employeeId");
+                Integer assignmentId = rs.getInt("employeeProjectId");
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                Date dateOfBirth = rs.getDate("dateOfBirth");
+                System.out.println(employeeId + " " + assignmentId + " " + firstName + " " + lastName + " " + dateOfBirth);
+            }
+
+        } catch (SQLException sqlexc) {
+            System.out.println("Database communication error");
+            sqlexc.printStackTrace();
+        }
+    }
+
+    private static void fifthExercise() {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection(
+                    DATABASE_HOST,
+                    DATABASE_USERNAME,
+                    DATABASE_PASSWORD);
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery("SELECT employeeId, firstName, lastName, dateOfBirth, name  FROM employees " +
+                    "JOIN departments ON departments.departmentId = employees.departmentId");
+
+            while(rs.next()) {
+                Integer employeeId = rs.getInt("employeeId");
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                String departmentName = rs.getString("name");
+
+                System.out.println(employeeId + " " + departmentName + " " + firstName + " " + lastName);
+            }
+
+        } catch (SQLException sqlexc) {
+            System.out.println("Database communication error");
+            sqlexc.printStackTrace();
+        }
+    }
+
 }
