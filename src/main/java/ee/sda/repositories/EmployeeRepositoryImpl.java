@@ -13,6 +13,21 @@ public class EmployeeRepositoryImpl implements EmployeeRepository{
     public static final String DATABASE_PASSWORD = "Nomansland22";
     private static DatabaseUtils database = new DatabaseUtils();
 
+    public int insertEmployee(Employee employee) throws SQLException {
+        Connection conn = database.getConnection();
+        PreparedStatement stmt = null;
+
+        String sql = "INSERT INTO `employees`(first_name, last_name, phoneNumber, email) VALUES (?, ?, ?, ?)";
+        stmt = conn.prepareStatement(sql);
+
+        stmt.setString(1,"Matt");
+        stmt.setString(2,"Matthews");
+        stmt.setString(4, "0800-800-800");
+        stmt.setString(5,"m@matthews.gmail.com");
+        int i = stmt.executeUpdate();
+        return i;
+    }
+
     @Override
     public List<Employee> findAll() throws SQLException {
         Connection conn = database.getConnection();

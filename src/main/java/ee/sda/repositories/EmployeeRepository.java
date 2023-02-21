@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface EmployeeRepository {
     List<Employee> findAll() throws SQLException;
+
+    int insertEmployee(Employee employee) throws SQLException;
+
 }
