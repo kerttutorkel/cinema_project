@@ -1,0 +1,16 @@
+Create class Department mapping the departments table: Integer departmentId, String name
+2. Create class DepartmentRepository
+a. Implement findAll() - returns a list of Department objects representing all table rows
+b. Implement findById(Integer departmentId) - takes an Integer parameter and returns the
+Department object corresponding to the provided departmentId
+c. Implement deleteById(Integer departmentId) - takes an Integer parameter and deletes the
+table row corresponding to the provided employeeId
+d. Implement save (Department department) - takes a new Department object parameter
+with no departmentId and saves the provided department in the database
+e. Implement update(Department department) - takes an existing Department object
+parameter (which already has a departmentId that exists in the database) and for the
+provided departmentId, it updates the name property in the database
+f. Implement findByName(String name) - takes a String parameter and returns a list of
+Department objects representing all table rows that have the provided name
+3. Optional: Implement ProjectRepository and EmployeeRepository methods findAll, findById,
+deleteById, save, update
