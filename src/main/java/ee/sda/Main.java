@@ -1,6 +1,10 @@
 package ee.sda;
 
+import ee.sda.repositories.EmployeeRepository;
+import ee.sda.repositories.EmployeeRepositoryImpl;
+
 import java.sql.*;
+import java.util.List;
 
 public class Main {
     public static final String DATABASE_HOST = "jdbc:mysql://localhost:3306/humanresources"; //JDBC URL
@@ -12,7 +16,13 @@ public class Main {
         //secondExercise();
         //thirdExercise();
         //fourthExercise();
-        fifthExercise();
+        //fifthExercise();
+        fetchAllUsingRepository();
+    }
+
+    private static List<Employee> fetchAllUsingRepository() {
+        EmployeeRepository er = new EmployeeRepositoryImpl();
+        return er.findAll();
     }
 
     private static void firstExercise() {
@@ -44,6 +54,7 @@ public class Main {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
+        PreparedStatement  ps = null;
 
         try {
             conn = DriverManager.getConnection(

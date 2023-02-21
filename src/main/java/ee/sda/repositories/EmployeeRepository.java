@@ -2,6 +2,8 @@ package ee.sda.repositories;
 
 import ee.sda.Employee;
 
+import java.util.List;
+
 public interface EmployeeRepository {
-    Employee findAll();
+    List<Employee> findAll();
 }

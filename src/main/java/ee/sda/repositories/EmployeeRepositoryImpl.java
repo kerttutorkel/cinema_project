@@ -3,6 +3,8 @@ package ee.sda.repositories;
 import ee.sda.Employee;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeRepositoryImpl implements EmployeeRepository{
     public static final String DATABASE_HOST = "jdbc:mysql://localhost:3306/humanresources"; //JDBC URL
@@ -10,10 +12,11 @@ public class EmployeeRepositoryImpl implements EmployeeRepository{
     public static final String DATABASE_PASSWORD = "Nomansland22";
 
     @Override
-    public Employee findAll() {
+    public List<Employee> findAll() {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
+        List<Employee> employees = new ArrayList<>();
 
         try {
             conn = DriverManager.getConnection(
@@ -28,13 +31,17 @@ public class EmployeeRepositoryImpl implements EmployeeRepository{
                 String firstName = rs.getString("firstName");
                 String lastName = rs.getString("lastName");
                 Date dateOfBirth = rs.getDate("dateOfBirth");
-                new Employee().setEmployeeId(employeeId).setLastName(lastName).setFirstName(firstName);
+                employees.add(new Employee()
+                        .setEmployeeId(employeeId)
+                        .setLastName(lastName)
+                        .setFirstName(firstName));
             }
+            return employees;
 
         } catch (SQLException sqlexc) {
             System.out.println("Database communication error");
             sqlexc.printStackTrace();
         }
-        return null;
+        return employees;
     }
 }
