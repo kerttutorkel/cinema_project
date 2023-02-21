@@ -2,16 +2,16 @@ package ee.sda;
 
 import ee.sda.repositories.EmployeeRepository;
 import ee.sda.repositories.EmployeeRepositoryImpl;
+import ee.sda.repositories.ProjectRepository;
+import ee.sda.repositories.ProjectRepositoryImpl;
 
 import java.sql.*;
 import java.util.List;
 
 public class Main {
-    public static final String DATABASE_HOST = "jdbc:mysql://localhost:3306/humanresources"; //JDBC URL
-    public static final String DATABASE_USERNAME = "root";
-    public static final String DATABASE_PASSWORD = "Nomansland22";
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws SQLException {
         //firstExercise();
         //secondExercise();
         //thirdExercise();
@@ -20,51 +20,29 @@ public class Main {
         fetchAllUsingRepository();
     }
 
-    private static List<Employee> fetchAllUsingRepository() {
+    private static List<Employee> fetchAllUsingRepository() throws SQLException {
         EmployeeRepository er = new EmployeeRepositoryImpl();
         return er.findAll();
     }
 
-    private static void firstExercise() {
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
+    private static List<Project> firstExercise() throws SQLException {
+        ProjectRepository er = new ProjectRepositoryImpl();
 
-        try {
-            conn = DriverManager.getConnection(
-                    DATABASE_HOST,
-                    DATABASE_USERNAME,
-                    DATABASE_PASSWORD);
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery("SELECT * FROM projects");
-
-            while(rs.next()) {
-                Integer projectId = rs.getInt("projectId");
-                String projectDescription = rs.getString("description");
-                System.out.println(projectId + " " + projectDescription);
-            }
-
-        } catch (SQLException sqlexc) {
-            System.out.println("Database communication error");
-            sqlexc.printStackTrace();
-        }
+        return er.findAll();
     }
 
     private static void secondExercise() {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
-        PreparedStatement  ps = null;
+        PreparedStatement ps = null;
 
         try {
-            conn = DriverManager.getConnection(
-                    DATABASE_HOST,
-                    DATABASE_USERNAME,
-                    DATABASE_PASSWORD);
+
             stmt = conn.createStatement();
             rs = stmt.executeQuery("SELECT * FROM employees");
 
-            while(rs.next()) {
+            while (rs.next()) {
                 Integer employeeId = rs.getInt("employeeId");
                 String firstName = rs.getString("firstName");
                 String lastName = rs.getString("lastName");
@@ -84,14 +62,11 @@ public class Main {
         ResultSet rs = null;
 
         try {
-            conn = DriverManager.getConnection(
-                    DATABASE_HOST,
-                    DATABASE_USERNAME,
-                    DATABASE_PASSWORD);
+
             stmt = conn.createStatement();
             rs = stmt.executeQuery("SELECT * FROM employees WHERE firstName LIKE 'J%'");
 
-            while(rs.next()) {
+            while (rs.next()) {
                 Integer employeeId = rs.getInt("employeeId");
                 String firstName = rs.getString("firstName");
                 String lastName = rs.getString("lastName");
@@ -111,15 +86,12 @@ public class Main {
         ResultSet rs = null;
 
         try {
-            conn = DriverManager.getConnection(
-                    DATABASE_HOST,
-                    DATABASE_USERNAME,
-                    DATABASE_PASSWORD);
+
             stmt = conn.createStatement();
             rs = stmt.executeQuery("SELECT * FROM employees " +
                     "LEFT JOIN employees_projects ON employees.employeeId = employees_projects.employeeId WHERE employeeProjectId is not NULL");
 
-            while(rs.next()) {
+            while (rs.next()) {
                 Integer employeeId = rs.getInt("employeeId");
                 Integer assignmentId = rs.getInt("employeeProjectId");
                 String firstName = rs.getString("firstName");
@@ -140,15 +112,12 @@ public class Main {
         ResultSet rs = null;
 
         try {
-            conn = DriverManager.getConnection(
-                    DATABASE_HOST,
-                    DATABASE_USERNAME,
-                    DATABASE_PASSWORD);
+
             stmt = conn.createStatement();
             rs = stmt.executeQuery("SELECT employeeId, firstName, lastName, dateOfBirth, name  FROM employees " +
                     "JOIN departments ON departments.departmentId = employees.departmentId");
 
-            while(rs.next()) {
+            while (rs.next()) {
                 Integer employeeId = rs.getInt("employeeId");
                 String firstName = rs.getString("firstName");
                 String lastName = rs.getString("lastName");

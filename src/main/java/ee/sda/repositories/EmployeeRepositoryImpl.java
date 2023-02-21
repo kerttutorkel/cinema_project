@@ -1,5 +1,6 @@
 package ee.sda.repositories;
 
+import ee.sda.DatabaseUtils;
 import ee.sda.Employee;
 
 import java.sql.*;
@@ -10,19 +11,15 @@ public class EmployeeRepositoryImpl implements EmployeeRepository{
     public static final String DATABASE_HOST = "jdbc:mysql://localhost:3306/humanresources"; //JDBC URL
     public static final String DATABASE_USERNAME = "root";
     public static final String DATABASE_PASSWORD = "Nomansland22";
+    private static DatabaseUtils database = new DatabaseUtils();
 
     @Override
-    public List<Employee> findAll() {
-        Connection conn = null;
+    public List<Employee> findAll() throws SQLException {
+        Connection conn = database.getConnection();
         Statement stmt = null;
         ResultSet rs = null;
         List<Employee> employees = new ArrayList<>();
 
-        try {
-            conn = DriverManager.getConnection(
-                    DATABASE_HOST,
-                    DATABASE_USERNAME,
-                    DATABASE_PASSWORD);
             stmt = conn.createStatement();
             rs = stmt.executeQuery("SELECT * FROM employees");
 
@@ -37,11 +34,5 @@ public class EmployeeRepositoryImpl implements EmployeeRepository{
                         .setFirstName(firstName));
             }
             return employees;
-
-        } catch (SQLException sqlexc) {
-            System.out.println("Database communication error");
-            sqlexc.printStackTrace();
-        }
-        return employees;
     }
 }
