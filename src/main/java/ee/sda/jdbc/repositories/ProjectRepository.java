@@ -1,6 +1,6 @@
-package ee.sda.repositories;
+package ee.sda.jdbc.repositories;
 
-import ee.sda.Project;
+import ee.sda.jdbc.Project;
 
 import java.sql.SQLException;
 import java.util.List;

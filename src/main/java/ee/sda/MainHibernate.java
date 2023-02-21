@@ -10,7 +10,7 @@ import ee.sda.jdbc.repositories.ProjectRepositoryImpl;
 import java.sql.*;
 import java.util.List;
 
-public class Main {
+public class MainHibernate {
 
 
     public static void main(String[] args) throws SQLException {

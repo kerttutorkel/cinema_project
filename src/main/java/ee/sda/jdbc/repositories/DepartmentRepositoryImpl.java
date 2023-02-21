@@ -1,7 +1,7 @@
-package ee.sda.repositories;
+package ee.sda.jdbc.repositories;
 
-import ee.sda.DatabaseUtils;
-import ee.sda.Department;
+import ee.sda.jdbc.DatabaseUtils;
+import ee.sda.jdbc.Department;
 
 import java.sql.*;
 import java.util.ArrayList;

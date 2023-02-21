@@ -1,4 +1,4 @@
-package ee.sda;
+package ee.sda.jdbc;
 
 public class Department {
     private Integer deptId;

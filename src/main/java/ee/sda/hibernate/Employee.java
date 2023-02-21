@@ -1,4 +1,4 @@
-package ee.sda;
+package ee.sda.hibernate;
 
 import java.util.Date;
 
