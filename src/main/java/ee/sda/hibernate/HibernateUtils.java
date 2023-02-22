@@ -13,7 +13,7 @@ import java.util.Properties;
 public class HibernateUtils {
     private static SessionFactory sessionFactory;
     public static SessionFactory getSessionFactory() {
-        if (sessionFactory != null) {
+        if (sessionFactory == null) {
             try {
                 Configuration configuration = new Configuration();
 
@@ -24,7 +24,7 @@ public class HibernateUtils {
                 settings.put(Environment.USER, "root");
                 settings.put(Environment.PASS, "Nomansland22");
                 settings.put(Environment.DIALECT,
-                        "org.hibernate.dialect.MYSQL5Dialect");
+                        "org.hibernate.dialect.MySQLDialect");
                 settings.put(Environment.SHOW_SQL, "true");
                 configuration.setProperties(settings);
 

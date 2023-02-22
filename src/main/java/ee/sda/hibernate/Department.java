@@ -14,7 +14,7 @@ public class Department {
     @Column(name = "department_name", columnDefinition = "VARCHAR(16)", nullable = false)
     private String deptName;
 
-
+    @Transient
     private List<Employee> employees;
 
 }
