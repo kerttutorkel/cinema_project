@@ -3,6 +3,7 @@ package ee.sda.hibernate;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -10,7 +11,8 @@ import java.util.List;
 @Entity
 @Table(name = "departments")
 public class Department {
-    private Integer deptId;
+    @Id
+    private Integer departmentId;
     private String deptName;
 
     private List<Employee> employees;
