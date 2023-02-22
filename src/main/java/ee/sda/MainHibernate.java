@@ -1,137 +1,46 @@
 package ee.sda;
 
+import ee.sda.hibernate.Department;
 import ee.sda.jdbc.Employee;
 import ee.sda.jdbc.Project;
 import ee.sda.jdbc.repositories.EmployeeRepository;
 import ee.sda.jdbc.repositories.EmployeeRepositoryImpl;
 import ee.sda.jdbc.repositories.ProjectRepository;
 import ee.sda.jdbc.repositories.ProjectRepositoryImpl;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.Environment;
+import org.hibernate.service.ServiceRegistry;
 
 import java.sql.*;
 import java.util.List;
+import java.util.Properties;
 
 public class MainHibernate {
 
 
     public static void main(String[] args) throws SQLException {
-        //firstExercise();
-        //secondExercise();
-        //thirdExercise();
-        //fourthExercise();
-        //fifthExercise();
-        fetchAllUsingRepository();
+        Configuration configuration = new Configuration();
+        Properties settings = new Properties();
+        settings.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
+        settings.put(Environment.URL,
+                "jdbc:mysql://localhost:3306/humanresources");
+        settings.put(Environment.USER, "root");
+        settings.put(Environment.PASS, "Nomansland22");
+        settings.put(Environment.DIALECT,
+                "org.hibernate.dialect.MYSQL5Dialect");
+        settings.put(Environment.SHOW_SQL, "true");
+        configuration.setProperties(settings);
+
+        configuration.addAnnotatedClass(Department.class);
+        configuration.addAnnotatedClass(Employee.class);
+        configuration.addAnnotatedClass(Project.class);
+
+        ServiceRegistry serviceRegistry = new
+                StandardServiceRegistryBuilder()
+                .applySettings(configuration.getProperties()).build();
     }
 
-    private static List<Employee> fetchAllUsingRepository() throws SQLException {
-        EmployeeRepository er = new EmployeeRepositoryImpl();
-        return er.findAll();
-    }
 
-    private static List<Project> firstExercise() throws SQLException {
-        ProjectRepository er = new ProjectRepositoryImpl();
-
-        return er.findAll();
-    }
-
-    private static void secondExercise() {
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-
-        try {
-
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery("SELECT * FROM employees");
-
-            while (rs.next()) {
-                Integer employeeId = rs.getInt("employeeId");
-                String firstName = rs.getString("firstName");
-                String lastName = rs.getString("lastName");
-                Date dateOfBirth = rs.getDate("dateOfBirth");
-                System.out.println(employeeId + " " + firstName + " " + lastName + " " + dateOfBirth);
-            }
-
-        } catch (SQLException sqlexc) {
-            System.out.println("Database communication error");
-            sqlexc.printStackTrace();
-        }
-    }
-
-    private static void thirdExercise() {
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-
-        try {
-
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery("SELECT * FROM employees WHERE firstName LIKE 'J%'");
-            while (rs.next()) {
-                Integer employeeId = rs.getInt("employeeId");
-                String firstName = rs.getString("firstName");
-                String lastName = rs.getString("lastName");
-                Date dateOfBirth = rs.getDate("dateOfBirth");
-
-                System.out.println(employeeId + " " + firstName + " " + lastName + " " + dateOfBirth);
-            }
-
-        } catch (SQLException sqlexc) {
-            System.out.println("Database communication error");
-            sqlexc.printStackTrace();
-        }
-    }
-
-    private static void fourthExercise() {
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-
-        try {
-
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery("SELECT * FROM employees " +
-                    "LEFT JOIN employees_projects ON employees.employeeId = employees_projects.employeeId WHERE employeeProjectId is not NULL");
-
-            while (rs.next()) {
-                Integer employeeId = rs.getInt("employeeId");
-                Integer assignmentId = rs.getInt("employeeProjectId");
-                String firstName = rs.getString("firstName");
-                String lastName = rs.getString("lastName");
-                Date dateOfBirth = rs.getDate("dateOfBirth");
-                System.out.println(employeeId + " " + assignmentId + " " + firstName + " " + lastName + " " + dateOfBirth);
-            }
-
-        } catch (SQLException sqlexc) {
-            System.out.println("Database communication error");
-            sqlexc.printStackTrace();
-        }
-    }
-
-    private static void fifthExercise() {
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-
-        try {
-
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery("SELECT employeeId, firstName, lastName, dateOfBirth, name  FROM employees " +
-                    "JOIN departments ON departments.departmentId = employees.departmentId");
-
-            while (rs.next()) {
-                Integer employeeId = rs.getInt("employeeId");
-                String firstName = rs.getString("firstName");
-                String lastName = rs.getString("lastName");
-                String departmentName = rs.getString("name");
-
-                System.out.println(employeeId + " " + departmentName + " " + firstName + " " + lastName);
-            }
-
-        } catch (SQLException sqlexc) {
-            System.out.println("Database communication error");
-            sqlexc.printStackTrace();
-        }
-    }
 
 }

@@ -1,10 +1,10 @@
 package ee.sda.hibernate;
 
-import lombok.*;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Data
