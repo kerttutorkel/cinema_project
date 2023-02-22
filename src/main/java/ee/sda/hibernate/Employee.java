@@ -1,8 +1,12 @@
 package ee.sda.hibernate;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name = "employees")
 public class Employee {
     private Integer employeeId;
     private String firstName;
