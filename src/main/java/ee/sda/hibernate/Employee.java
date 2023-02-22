@@ -1,11 +1,16 @@
 package ee.sda.hibernate;
 
 import java.util.Date;
+import java.util.List;
 
 public class Employee {
     private Integer employeeId;
-    private String firstName, lastName;
-    private Integer departmentId;
+    private String firstName;
+    private String lastName;
+
+    private Department department;
+
+    private List<Project> project;
     private Date birthDate;
 
     public Integer getEmployeeId() {
@@ -32,15 +37,6 @@ public class Employee {
 
     public Employee setLastName(String lastName) {
         this.lastName = lastName;
-        return this;
-    }
-
-    public Integer getDepartmentId() {
-        return departmentId;
-    }
-
-    public Employee setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
         return this;
     }
 

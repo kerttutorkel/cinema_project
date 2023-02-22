@@ -10,7 +10,7 @@ import java.util.List;
 public class DepartmentRepositoryImpl {
     public List<Department> findAll() {
         List<Department> departmentList = new ArrayList<Department>();
-        String selectAllDepartments = "SELECT * FROM departments";
+        String selectAllDepartments = "SELECT * FROM departments LIMIT ?,?";
 
         try (
                 Connection conn = DriverManager.getConnection(
