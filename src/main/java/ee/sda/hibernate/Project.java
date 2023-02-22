@@ -16,6 +16,7 @@ public class Project {
     private String projectName;
 
 
+    @Transient
     private Employee employee;
 
 }

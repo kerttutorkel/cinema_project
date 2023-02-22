@@ -2,9 +2,8 @@ package ee.sda.hibernate;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -15,10 +14,17 @@ public class Employee {
 
     @Id
     private Integer employeeId;
+    @Column(name = "first_name", columnDefinition = "VARCHAR(24)", nullable = false)
     private String firstName;
+    @Column(name = "last_name", columnDefinition = "VARCHAR(24)", nullable = false)
     private String lastName;
+
+    @Transient
     private Department department;
+    @Transient
     private List<Project> project;
-    private Date birthDate;
+
+    @Column(name = "last_name", columnDefinition = "DATE", nullable = false)
+    private LocalDate birthDate;
 
 }
