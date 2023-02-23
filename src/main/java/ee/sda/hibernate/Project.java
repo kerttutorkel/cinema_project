@@ -3,6 +3,7 @@ package ee.sda.hibernate;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -15,8 +16,11 @@ public class Project {
     @Column(columnDefinition = "VARCHAR(32)", name = "project_name")
     private String projectName;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+    @ManyToMany
+    @JoinTable(
+            name = "employees_projects",
+            joinColumns = { @JoinColumn(name = "projectId") },
+            inverseJoinColumns = { @JoinColumn(name = "employeeId") })
+    private List<Employee> employee;
 
 }

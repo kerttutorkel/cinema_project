@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "employees")
-public class Employee {
+public class Employee { //many side
 
     @Id
     private Integer employeeId;
@@ -22,7 +22,7 @@ public class Employee {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @OneToMany(mappedBy = "employee", orphanRemoval = true)
+    @ManyToMany(mappedBy = "projects")
     private List<Project> project;
 
     @Column(name = "birth_date", columnDefinition = "DATE", nullable = false)
