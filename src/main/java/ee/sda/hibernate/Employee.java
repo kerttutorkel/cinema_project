@@ -22,7 +22,7 @@ public class Employee { //many side
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @ManyToMany(mappedBy = "projects")
+    @ManyToMany(mappedBy = "employee")
     private List<Project> project;
 
     @Column(name = "birth_date", columnDefinition = "DATE", nullable = false)
