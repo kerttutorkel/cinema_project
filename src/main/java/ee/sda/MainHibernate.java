@@ -11,7 +11,4 @@ public class MainHibernate {
         Department dept = session.find(Department.class, 1);
         session.close();
     }
-
-
-
 }

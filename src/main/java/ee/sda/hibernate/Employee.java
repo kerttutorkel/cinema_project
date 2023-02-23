@@ -1,7 +1,6 @@
 package ee.sda.hibernate;
 
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -24,7 +23,7 @@ public class Employee {
     @Transient
     private List<Project> project;
 
-    @Column(name = "last_name", columnDefinition = "DATE", nullable = false)
+    @Column(name = "birth_date", columnDefinition = "DATE", nullable = false)
     private LocalDate birthDate;
 
 }
