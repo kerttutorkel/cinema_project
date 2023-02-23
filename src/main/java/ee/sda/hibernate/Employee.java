@@ -18,9 +18,11 @@ public class Employee {
     @Column(name = "last_name", columnDefinition = "VARCHAR(24)", nullable = false)
     private String lastName;
 
-    @Transient
+    @ManyToOne
+    @JoinColumn(name = "department_id")
     private Department department;
-    @Transient
+
+    @OneToMany(mappedBy = "employee", orphanRemoval = true)
     private List<Project> project;
 
     @Column(name = "birth_date", columnDefinition = "DATE", nullable = false)

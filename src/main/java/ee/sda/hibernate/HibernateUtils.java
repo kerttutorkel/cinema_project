@@ -1,7 +1,5 @@
 package ee.sda.hibernate;
 
-import ee.sda.jdbc.Employee;
-import ee.sda.jdbc.Project;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;

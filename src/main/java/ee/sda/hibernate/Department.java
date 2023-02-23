@@ -15,7 +15,7 @@ public class Department {
     @Column(name = "name", columnDefinition = "VARCHAR(16)", nullable = false)
     private String deptName;
 
-    @Transient
+    @OneToMany(mappedBy = "department", orphanRemoval = true)
     private List<Employee> employees = new ArrayList<>();
 
 }

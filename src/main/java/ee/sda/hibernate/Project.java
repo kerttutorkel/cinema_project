@@ -15,8 +15,8 @@ public class Project {
     @Column(columnDefinition = "VARCHAR(32)", name = "project_name")
     private String projectName;
 
-
-    @Transient
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 
 }
