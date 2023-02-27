@@ -1,4 +1,4 @@
-package ee.sda.hibernate;
+package ee.sda.hibernate.hr;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

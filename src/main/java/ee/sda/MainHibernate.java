@@ -1,7 +1,7 @@
 package ee.sda;
 
-import ee.sda.hibernate.Department;
-import ee.sda.hibernate.HibernateUtils;
+import ee.sda.hibernate.hr.Department;
+import ee.sda.hibernate.hr.HibernateUtils;
 import org.hibernate.Session;
 
 public class MainHibernate {

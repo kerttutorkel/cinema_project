@@ -1,4 +1,4 @@
-package ee.sda.hibernate;
+package ee.sda.hibernate.hr;
 
 import lombok.Data;
 
