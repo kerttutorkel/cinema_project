@@ -12,7 +12,9 @@ import javax.persistence.Table;
 @Table(name = "tickets", schema = "cinema")
 public class Ticket {
 
+    private Integer ticketId;
     private TicketCategory category;
     private Seat seat;
     private Schedule schedule;
+
 }

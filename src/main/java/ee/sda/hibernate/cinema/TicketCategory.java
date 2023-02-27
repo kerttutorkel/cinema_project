@@ -11,4 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ticket_categories", schema = "cinema")
 public class TicketCategory {
+    private Integer ticketCategoryId;
+    private String type;
+    private Integer price;
 }

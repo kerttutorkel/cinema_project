@@ -11,6 +11,8 @@ import javax.persistence.Table;
 @Table(name = "reservations", schema = "cinema")
 @NoArgsConstructor
 public class Reservation {
+    private Integer reservationId;
+    private Boolean isPaid; //in MySQL true/false is replaced by 1/0
     private Schedule schedule;
     private Client client;
 }

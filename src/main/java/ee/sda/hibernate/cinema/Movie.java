@@ -11,4 +11,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "movies", schema = "cinema")
 public class Movie {
+    private Integer movieId;
+    private String name;
+    private String category;
+    private Integer durationInMinutes;
+    private String description;
 }

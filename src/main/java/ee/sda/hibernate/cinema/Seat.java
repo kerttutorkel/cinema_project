@@ -12,5 +12,8 @@ import javax.persistence.Table;
 @Table(name = "seats", schema = "cinema")
 public class Seat {
 
+    private Integer seatId;
+    private Integer row;
+    private Integer number;
     private Room room;
 }
